@@ -1,6 +1,19 @@
 def group_by_signature(words: list) -> list:
-    pass
-
+    groups = {}
+    
+    for word in words:
+        if not isinstance(word, str) or not word:
+            continue
+        if not all('a' <= char <= 'z' for char in word):
+            continue
+            
+        signature = ''.join(sorted(word))
+        
+        if signature not in groups:
+            groups[signature] = []
+        groups[signature].append(word)
+        
+    return list(groups.values())
 if __name__ == "__main__":
     # Example 1
     words = ["abc", "bca", "cab", "bac", "xyz", "yxz", "zxy", "dog"]
